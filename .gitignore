@@ -1,0 +1,21 @@
+# Dependências do Node (esta pasta é gigante, nunca deve subir)
+node_modules/
+
+# Arquivos de log do sistema
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de ambiente (onde futuramente guardaremos senhas do banco)
+.env
+
+# Pastas de build/dist (caso use React futuramente)
+dist/
+build/
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Configurações do VS Code
+.vscode/
