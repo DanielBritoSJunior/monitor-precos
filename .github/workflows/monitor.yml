@@ -1,0 +1,25 @@
+name: Monitor de Preços Diários
+
+on:
+  schedule:
+    # Isso faz o robô rodar todo dia às 08:00 da manhã (Horário de Brasília)
+    - cron: '0 11 * * *' 
+  workflow_dispatch: # Permite que você clique em um botão no GitHub para rodar agora
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixando o código do Daniel
+        uses: actions/checkout@v3
+
+      - name: Instalando Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalando as bibliotecas (Puppeteer, SQLite, Axios)
+        run: npm install
+
+      - name: Executando o Scraper de Ofertas
+        run: node scraper.js
