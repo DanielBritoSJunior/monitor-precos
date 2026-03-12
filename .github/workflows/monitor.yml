@@ -1,16 +1,15 @@
-name: Monitor de Preços Diários
+name: Monitor de Precos Diario
 
 on:
   schedule:
-    # Isso faz o robô rodar todo dia às 08:00 da manhã (Horário de Brasília)
     - cron: '0 11 * * *' 
-  workflow_dispatch: # Permite que você clique em um botão no GitHub para rodar agora
+  workflow_dispatch: 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Baixando o código do Daniel
+      - name: Baixando o codigo
         uses: actions/checkout@v3
 
       - name: Instalando Node.js
@@ -18,8 +17,11 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Instalando as bibliotecas (Puppeteer, SQLite, Axios)
+      - name: Instalando dependencias
         run: npm install
 
-      - name: Executando o Scraper de Ofertas
+      - name: Rodando o Scraper
+        env: # ESSA PARTE É OBRIGATÓRIA
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
         run: node scraper.js
